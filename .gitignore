@@ -85,5 +85,5 @@ nb-configuration.xml
 ##############################
 ## Project Database Files
 ##############################
-bankDB
+bankDB/
 

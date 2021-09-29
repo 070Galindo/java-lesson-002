@@ -9,7 +9,7 @@ public class BankDB {
      * @param values
      * @throws Exception
      */
-    public void addRecord(String fileName, String[] values) throws Exception {
+    public void addRecord(BankDbFile fileName, String[] values) throws Exception {
         String line = new String();
          
         for (int i = 0; i < values.length; i++){
@@ -19,9 +19,7 @@ public class BankDB {
         line = line.substring(0, line.length() - 1);
         line += System.lineSeparator();
 
-        String fileAdress = System.getProperty("user.dir") + "\\src\\" + fileName;
-
-        File record = new File(fileAdress);
+        File record = new File(fileName.getFileAddress());
         
         FileOutputStream output = new FileOutputStream(record, true);
         output.write(line.getBytes());
