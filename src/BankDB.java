@@ -44,8 +44,14 @@ public class BankDB {
          * If then array is not empty, then since all files have the id in the first column,
          * just return the first column of the array.
          */
-
-        return 0;
+        String[] record = getLastRecord(bankDbFile);
+        int nextId = 0;
+        
+        if(record.length != 0) {
+            nextId = Integer.parseInt(record[0]) + 1;
+        }
+        
+        return nextId;
     }
     
     /**Updates a specific field in a record in a file that matches the column id.
@@ -131,7 +137,24 @@ public class BankDB {
          * Return the array.
          */
         
-        return new String[0];
+        //loop through file to get last line.
+        String currentLine;
+        String lastLine = null;
+        
+        BufferedReader br = new BufferedReader(new FileReader((bankDbFile.getFileAddress())));
+
+        while((currentLine = br.readLine()) != null) {
+            lastLine = currentLine;
+        }
+
+        //split comma delimited line into array
+        String[] record = new String[0];
+
+        if(lastLine != null) {
+            record = lastLine.split(",");
+        }
+
+        return record;
     }
     //#endregion
 }
