@@ -96,7 +96,24 @@ public class BankDB {
          * Return the array.
          */
         
-        return new String[0];
+        String currentLine;
+        String[] record = new String[0];
+        BufferedReader br = new BufferedReader(new FileReader((bankDbFile.getFileAddress())));
+        boolean matchFound = false;
+        while((currentLine = br.readLine()) != null) {
+            record = currentLine.split(",");
+
+            if(matchValue.equals(record[columnIndexToMatch])) {
+                matchFound = true;
+                break;
+            }
+        }
+        
+        if(matchFound == false) {
+            record = new String[0];
+        }
+
+        return record;
     }
 
     /**Pulls all records from a db file based on a column match.
